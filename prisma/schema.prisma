@@ -1,0 +1,152 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  password  String
+  role      String   @default("member")
+  state     String?
+  createdAt DateTime @default(now())
+
+  posts            Post[]
+  groupMembers     GroupMember[]
+  diaryEntries     DiaryEntry[]
+  surveyResponses  SurveyResponse[]
+  eventRegistrations EventRegistration[]
+}
+
+model Group {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  description String
+  category    String
+  state       String?
+  rules       String?
+  createdAt   DateTime @default(now())
+
+  posts   Post[]
+  members GroupMember[]
+}
+
+model GroupMember {
+  id        String   @id @default(cuid())
+  userId    String
+  groupId   String
+  joinedAt  DateTime @default(now())
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  group Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, groupId])
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  content   String
+  userId    String
+  groupId   String
+  status    String   @default("approved")
+  createdAt DateTime @default(now())
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  group Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
+}
+
+model Event {
+  id           String   @id @default(cuid())
+  title        String
+  description  String
+  specialist   String
+  specialty    String
+  date         DateTime
+  durationMin  Int      @default(60)
+  link         String?
+  maxAttendees Int      @default(100)
+  createdAt    DateTime @default(now())
+
+  registrations EventRegistration[]
+}
+
+model EventRegistration {
+  id        String   @id @default(cuid())
+  userId    String
+  eventId   String
+  createdAt DateTime @default(now())
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, eventId])
+}
+
+model SupportLocation {
+  id          String  @id @default(cuid())
+  name        String
+  type        String
+  state       String
+  city        String
+  address     String?
+  phone       String?
+  website     String?
+  description String?
+  lat         Float?
+  lng         Float?
+  verified    Boolean @default(false)
+}
+
+model SurveyResponse {
+  id                  String   @id @default(cuid())
+  userId              String?
+  consentGiven        Boolean
+  state               String
+  yearsSinceDiagnosis Int?
+  susDifficulty       Int?
+  workImpact          Int?
+  emotionalImpact     Int?
+  treatmentAccess     Int?
+  mainDifficulties    String?
+  createdAt           DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+}
+
+model DiaryEntry {
+  id              String  @id @default(cuid())
+  userId          String
+  date            String
+  dor             Int
+  sono            Int
+  fadiga          Int
+  humor           Int
+  medicamentos    String  @default("")
+  atividadeFisica String  @default("")
+  crise           Boolean @default(false)
+  gatilhos        String  @default("")
+  alimentacao     String  @default("")
+  observacoes     String  @default("")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, date])
+}
+
+model Benefit {
+  id          String  @id @default(cuid())
+  title       String
+  partner     String
+  description String
+  category    String
+  discount    String?
+  code        String?
+  link        String?
+  active      Boolean @default(true)
+}
