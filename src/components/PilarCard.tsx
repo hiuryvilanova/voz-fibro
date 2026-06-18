@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ServiceIcon } from "@/components/ServiceIcon";
 
 interface PilarCardProps {
   titulo: string;
@@ -8,13 +9,13 @@ interface PilarCardProps {
   href?: string;
 }
 
-const cores = {
-  primary: "border-primary/20 bg-primary/5",
-  secondary: "border-secondary/20 bg-secondary/5",
-  accent: "border-accent/20 bg-accent/5",
+const coresBorda = {
+  primary: "border-primary/30 bg-primary/8 hover:border-primary/60",
+  secondary: "border-secondary/30 bg-secondary/8 hover:border-secondary/60",
+  accent: "border-accent/30 bg-accent/8 hover:border-accent/60",
 };
 
-const tituloCores = {
+const titulosClasses = {
   primary: "text-primary",
   secondary: "text-secondary",
   accent: "text-accent",
@@ -29,17 +30,15 @@ export function PilarCard({
 }: PilarCardProps) {
   const content = (
     <article
-      className={`rounded-2xl border p-6 transition-shadow hover:shadow-md ${cores[cor]}`}
+      className={`rounded-lg border-2 p-6 transition-all hover:shadow-md ${coresBorda[cor]}`}
     >
-      <h3 className={`text-lg font-semibold ${tituloCores[cor]}`}>{titulo}</h3>
-      <p className="mt-2 text-sm text-muted leading-relaxed">{descricao}</p>
-      <ul className="mt-4 space-y-2">
+      <h3 className={`text-2xl font-bold mb-4 ${titulosClasses[cor]}`}>{titulo}</h3>
+      <p className="text-lg text-muted leading-relaxed mb-6">{descricao}</p>
+      <ul className="space-y-3">
         {itens.map((item) => (
-          <li key={item} className="flex gap-2 text-sm text-foreground">
-            <span className="text-primary" aria-hidden>
-              •
-            </span>
-            {item}
+          <li key={item} className="flex gap-3 text-base text-foreground">
+            <span className="shrink-0" style={{ color: `var(--${cor})` }}><ServiceIcon name="check" className="mt-0.5 h-5 w-5" /></span>
+            <span>{item}</span>
           </li>
         ))}
       </ul>

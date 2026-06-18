@@ -66,3 +66,15 @@ export async function POST(request: Request) {
     return jsonError("Erro ao sincronizar.", 500);
   }
 }
+
+export async function DELETE(request: Request) {
+  try {
+    const session = await requireSession();
+    const { date } = await request.json();
+    if (typeof date !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(date)) return jsonError("Registro inválido.");
+    await prisma.diaryEntry.deleteMany({ where: { userId: session.id, date } });
+    return jsonOk({ removed: true });
+  } catch {
+    return jsonError("Não foi possível remover o registro.", 500);
+  }
+}

@@ -1,4 +1,4 @@
-# Voz da Fibro — Comunidade, Cuidado e Direitos
+# Voz da Fibro: Comunidade, Cuidado e Direitos
 
 Ecossistema digital nacional de acolhimento, informação confiável e mobilização social para pessoas com fibromialgia no Brasil.
 
@@ -15,7 +15,7 @@ Ecossistema digital nacional de acolhimento, informação confiável e mobiliza�
 | Módulo | Rota | Descrição |
 |--------|------|-----------|
 | Biblioteca | `/biblioteca` | 15 artigos curados |
-| Diário | `/diario` | Registro local + sync na nuvem |
+| Diário | `/diario` | Registros protegidos na conta e relatório para consulta |
 | Comunidade | `/comunidade` | Grupos moderados com publicações |
 | Rodas | `/rodas` | Agenda de encontros com especialistas |
 | Mapa | `/mapa` | Associações, SUS e serviços por região |
@@ -35,25 +35,21 @@ Ecossistema digital nacional de acolhimento, informação confiável e mobiliza�
 
 - Next.js 16 (App Router)
 - TypeScript + Tailwind CSS 4
-- Prisma 7 + SQLite
+- Prisma 7 + MySQL/MariaDB
 - Autenticação com JWT em cookie httpOnly
+- Login local e Google OAuth 2.0
+- Deploy preparado para Vercel com banco Hostinger
 
 ## Como executar
 
 ```bash
 npm install
-npm run db:setup    # migra banco e popula dados iniciais
+npm run db:deploy   # aplica migrações pendentes
+npm run db:seed     # opcional: popula dados demonstrativos
 npm run dev
 ```
 
-Acesse [http://localhost:3000](http://localhost:3000).
-
-### Contas de teste (após seed)
-
-| Perfil | E-mail | Senha |
-|--------|--------|-------|
-| Moderador | moderador@vozdafibro.org | moderador123 |
-| Admin | admin@vozdafibro.org | admin123 |
+Acesse [http://localhost:3000](http://localhost:3000) ou a porta informada pelo terminal.
 
 ### Build de produção
 
@@ -63,6 +59,15 @@ npm start
 ```
 
 Configure `SESSION_SECRET` e `DATABASE_URL` no `.env` para produção.
+
+### Deploy na Vercel
+
+1. Cadastre todas as variáveis descritas em [`.env.example`](.env.example) nas configurações do projeto.
+2. Execute `npm run db:deploy` contra o banco de produção antes de publicar alterações de schema.
+3. Configure o domínio e o callback do Google com HTTPS.
+4. Use `npm run deploy:check` para validar a entrega localmente.
+
+O procedimento completo está em [docs/VERCEL-DEPLOY.md](docs/VERCEL-DEPLOY.md).
 
 ## Disclaimer
 

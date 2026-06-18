@@ -1,43 +1,43 @@
 import type { Metadata } from "next";
-import { Source_Sans_3 } from "next/font/google";
+import { Public_Sans } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { CookieConsent } from "@/components/CookieConsent";
+import { PageReturn } from "@/components/PageReturn";
+import { ScrollToTop } from "@/components/ScrollToTop";
 import "./globals.css";
 
-const sourceSans = Source_Sans_3({
-  variable: "--font-source-sans",
+const publicSans = Public_Sans({
+  variable: "--font-public-sans",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
+  icons: {
+    icon: "/images/voz.png",
+    shortcut: "/images/voz.png",
+    apple: "/images/voz.png",
+  },
   title: {
-    default: "Voz da Fibro — Comunidade, Cuidado e Direitos",
+    default: "Voz da Fibro: Comunidade, Cuidado e Direitos",
     template: "%s | Voz da Fibro",
   },
-  description:
-    "Ecossistema digital nacional de acolhimento, informação confiável e mobilização social para pessoas com fibromialgia no Brasil.",
-  keywords: [
-    "fibromialgia",
-    "Voz da Fibro",
-    "dor crônica",
-    "saúde",
-    "comunidade",
-    "direitos",
-  ],
+  description: "Plataforma nacional de acolhimento, informação confiável e mobilização social para pessoas com fibromialgia no Brasil.",
+  keywords: ["fibromialgia", "Voz da Fibro", "dor crônica", "saúde", "comunidade", "direitos"],
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR" className={`${sourceSans.variable} h-full`}>
-      <body className="flex min-h-full flex-col antialiased pb-16 lg:pb-0">
+    <html lang="pt-BR" className={`${publicSans.variable} h-full`}>
+      <body className="flex min-h-full flex-col antialiased">
+        <ScrollToTop />
         <Header />
+        <PageReturn />
         <main className="flex-1">{children}</main>
         <Footer />
+        <CookieConsent />
       </body>
     </html>
   );

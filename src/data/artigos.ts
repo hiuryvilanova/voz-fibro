@@ -55,7 +55,7 @@ export const artigos: Artigo[] = [
       "Entenda a condição, sua prevalência no Brasil e por que ela ainda é tão invisibilizada.",
     categoria: "fundamentos",
     tempoLeitura: 5,
-    revisadoPor: "Conselho Consultivo Voz da Fibro (piloto)",
+    revisadoPor: "Conselho Consultivo Voz da Fibro",
     atualizadoEm: "2026-06-18",
     conteudo: [
       "A fibromialgia é uma síndrome caracterizada por dor musculoesquelética generalizada, associada frequentemente a fadiga, distúrbios do sono, alterações de memória e atenção, ansiedade e depressão.",
@@ -72,7 +72,7 @@ export const artigos: Artigo[] = [
       "Dor generalizada, fadiga, sono ruim, ansiedade e outros sinais que muitas pessoas relatam.",
     categoria: "sintomas",
     tempoLeitura: 6,
-    revisadoPor: "Conselho Consultivo Voz da Fibro (piloto)",
+    revisadoPor: "Conselho Consultivo Voz da Fibro",
     atualizadoEm: "2026-06-18",
     conteudo: [
       "Os sintomas variam de pessoa para pessoa e podem mudar ao longo do tempo. Os mais frequentemente relatados incluem:",
@@ -91,7 +91,7 @@ export const artigos: Artigo[] = [
       "Dicas práticas para aproveitar melhor seu tempo com o profissional de saúde.",
     categoria: "fundamentos",
     tempoLeitura: 5,
-    revisadoPor: "Conselho Consultivo Voz da Fibro (piloto)",
+    revisadoPor: "Conselho Consultivo Voz da Fibro",
     atualizadoEm: "2026-06-18",
     conteudo: [
       "Consultas médicas podem ser curtas. Uma boa preparação ajuda você a ser ouvida e a sair com orientações mais claras.",
@@ -109,7 +109,7 @@ export const artigos: Artigo[] = [
       "Por que o exercício aeróbico é parte central do tratamento — sempre com orientação adequada.",
     categoria: "tratamento",
     tempoLeitura: 6,
-    revisadoPor: "Conselho Consultivo Voz da Fibro (piloto)",
+    revisadoPor: "Conselho Consultivo Voz da Fibro",
     atualizadoEm: "2026-06-18",
     conteudo: [
       "A Sociedade Brasileira de Reumatologia destaca o exercício aeróbico como parte central do tratamento da fibromialgia, sempre com orientação adequada.",
@@ -127,7 +127,7 @@ export const artigos: Artigo[] = [
       "A relação entre sono não reparador, dor e fadiga — e o que pode ajudar.",
     categoria: "sintomas",
     tempoLeitura: 5,
-    revisadoPor: "Conselho Consultivo Voz da Fibro (piloto)",
+    revisadoPor: "Conselho Consultivo Voz da Fibro",
     atualizadoEm: "2026-06-18",
     conteudo: [
       "Distúrbios do sono são muito comuns na fibromialgia. Muitas pessoas relatam acordar cansadas mesmo após dormir várias horas.",
@@ -145,7 +145,7 @@ export const artigos: Artigo[] = [
       "Ansiedade, depressão e o impacto emocional de viver com dor persistente.",
     categoria: "vida-cotidiana",
     tempoLeitura: 6,
-    revisadoPor: "Conselho Consultivo Voz da Fibro (piloto)",
+    revisadoPor: "Conselho Consultivo Voz da Fibro",
     atualizadoEm: "2026-06-18",
     conteudo: [
       "Viver com dor crônica afeta profundamente a saúde mental. Ansiedade e depressão são comuns — e não significam que a dor 'é psicológica' ou inventada.",
@@ -163,7 +163,7 @@ export const artigos: Artigo[] = [
       "Orientações para ajudar familiares a compreender a fibromialgia.",
     categoria: "vida-cotidiana",
     tempoLeitura: 5,
-    revisadoPor: "Conselho Consultivo Voz da Fibro (piloto)",
+    revisadoPor: "Conselho Consultivo Voz da Fibro",
     atualizadoEm: "2026-06-18",
     conteudo: [
       "Muitas pessoas com fibromialgia sentem que a família não entende — ou pior, acha que é 'preguiça' ou 'dramatização'.",
@@ -181,7 +181,7 @@ export const artigos: Artigo[] = [
       "Benefícios previdenciários, atendimento prioritário e legislação aplicável.",
     categoria: "direitos",
     tempoLeitura: 7,
-    revisadoPor: "Conselho Consultivo Voz da Fibro (piloto)",
+    revisadoPor: "Conselho Consultivo Voz da Fibro",
     atualizadoEm: "2026-06-18",
     conteudo: [
       "Pessoas com fibromialgia têm direitos que muitas vezes desconhecem. Conhecer esses direitos é o primeiro passo para exercê-los.",
@@ -199,7 +199,7 @@ export const artigos: Artigo[] = [
       "Passo a passo para acessar cuidado na rede pública de saúde.",
     categoria: "direitos",
     tempoLeitura: 6,
-    revisadoPor: "Conselho Consultivo Voz da Fibro (piloto)",
+    revisadoPor: "Conselho Consultivo Voz da Fibro",
     atualizadoEm: "2026-06-18",
     conteudo: [
       "O SUS oferece atendimento para fibromialgia, mas o acesso pode variar conforme a região e a disponibilidade de especialistas.",
@@ -218,7 +218,7 @@ export const artigos: Artigo[] = [
       "Como lidar com as dificuldades profissionais e conhecer seus direitos.",
     categoria: "vida-cotidiana",
     tempoLeitura: 6,
-    revisadoPor: "Conselho Consultivo Voz da Fibro (piloto)",
+    revisadoPor: "Conselho Consultivo Voz da Fibro",
     atualizadoEm: "2026-06-18",
     conteudo: [
       "A fibromialgia pode impactar significativamente a capacidade de trabalho — e isso não é falta de vontade.",
@@ -226,7 +226,7 @@ export const artigos: Artigo[] = [
       "**Comunique com cautela** — nem todo ambiente de trabalho é acolhedor. Avalie com quem confia antes de se abrir amplamente.",
       "**Documente** — atestados médicos, registros de consultas e impacto funcional podem ser importantes para processos trabalhistas ou previdenciários.",
       "**Adaptações razoáveis** — home office parcial, pausas, ajuste de carga horária ou de tarefas podem ser solicitados. Consulte RH ou sindicato.",
-      "**Grupo na comunidade** — o grupo 'Fibromialgia e trabalho' será espaço para trocar experiências e estratégias (em breve no piloto).",
+      "**Grupo na comunidade** — o grupo 'Fibromialgia e trabalho' é um espaço para trocar experiências e estratégias.",
     ],
   },
   {
@@ -236,7 +236,7 @@ export const artigos: Artigo[] = [
       "Orientações gerais sobre hábitos alimentares e organização do dia a dia.",
     categoria: "vida-cotidiana",
     tempoLeitura: 5,
-    revisadoPor: "Conselho Consultivo Voz da Fibro (piloto)",
+    revisadoPor: "Conselho Consultivo Voz da Fibro",
     atualizadoEm: "2026-06-18",
     conteudo: [
       "Não existe 'dieta da fibromialgia' comprovada cientificamente. Cuidado com promessas de cura através da alimentação.",
@@ -254,7 +254,7 @@ export const artigos: Artigo[] = [
       "Por que registrar sintomas ajuda você e seu médico — e como usar a ferramenta da plataforma.",
     categoria: "tratamento",
     tempoLeitura: 4,
-    revisadoPor: "Conselho Consultivo Voz da Fibro (piloto)",
+    revisadoPor: "Conselho Consultivo Voz da Fibro",
     atualizadoEm: "2026-06-18",
     conteudo: [
       "A fibromialgia tem sintomas variáveis e subjetivos. Um diário organiza sua experiência em dados que o médico pode usar na consulta.",
@@ -262,7 +262,7 @@ export const artigos: Artigo[] = [
       "**Com que frequência:** idealmente diariamente, mesmo que brevemente. Duas semanas de registro já mostram padrões úteis.",
       "**Use o relatório** — a ferramenta Diário da plataforma gera um resumo para imprimir ou levar no celular à consulta.",
       "**Não é diagnóstico** — o relatório é apoio à comunicação, não substitui avaliação médica.",
-      "Acesse o Diário pelo menu principal e comece hoje. Seus dados ficam no seu dispositivo nesta versão piloto.",
+      "Acesse o Diário pelo menu principal e comece hoje. O histórico ajuda a organizar informações importantes para a consulta.",
     ],
   },
   {
@@ -272,7 +272,7 @@ export const artigos: Artigo[] = [
       "Sinais de alerta e como proteger-se de informações e produtos perigosos.",
     categoria: "seguranca",
     tempoLeitura: 6,
-    revisadoPor: "Conselho Consultivo Voz da Fibro (piloto)",
+    revisadoPor: "Conselho Consultivo Voz da Fibro",
     atualizadoEm: "2026-06-18",
     conteudo: [
       "Pessoas com dor crônica são alvo frequente de golpes e promessas de cura milagrosa. Proteger-se é essencial.",
@@ -291,7 +291,7 @@ export const artigos: Artigo[] = [
       "Informação geral sobre o uso de medicamentos — sem prescrição.",
     categoria: "tratamento",
     tempoLeitura: 5,
-    revisadoPor: "Conselho Consultivo Voz da Fibro (piloto)",
+    revisadoPor: "Conselho Consultivo Voz da Fibro",
     atualizadoEm: "2026-06-18",
     conteudo: [
       "O tratamento da fibromialgia pode envolver medidas farmacológicas e não farmacológicas, conforme avaliação individual do médico.",
@@ -309,7 +309,7 @@ export const artigos: Artigo[] = [
       "Como a plataforma usará dados agregados para defender direitos — com seu consentimento.",
     categoria: "direitos",
     tempoLeitura: 5,
-    revisadoPor: "Conselho Consultivo Voz da Fibro (piloto)",
+    revisadoPor: "Conselho Consultivo Voz da Fibro",
     atualizadoEm: "2026-06-18",
     conteudo: [
       "A Voz da Fibro nasce também como instrumento de mobilização social e política pública.",

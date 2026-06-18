@@ -35,7 +35,7 @@ export async function POST(request: Request, { params }: RouteParams) {
         groupId: group.id,
         status: "approved",
       },
-      include: { user: { select: { name: true } } },
+      include: { user: { select: { name: true, avatarUrl: true } } },
     });
 
     return jsonOk({
@@ -44,6 +44,7 @@ export async function POST(request: Request, { params }: RouteParams) {
         content: post.content,
         createdAt: post.createdAt.toISOString(),
         author: post.user.name,
+        authorAvatar: post.user.avatarUrl,
         authorId: session.id,
         canModerate: true,
       },
@@ -72,7 +73,7 @@ export async function GET(request: Request, { params }: RouteParams) {
     where: { groupId: group.id, ...statusFilter },
     orderBy: { createdAt: "desc" },
     take: 50,
-    include: { user: { select: { id: true, name: true } } },
+    include: { user: { select: { id: true, name: true, avatarUrl: true } } },
   });
 
   return jsonOk({
@@ -82,6 +83,7 @@ export async function GET(request: Request, { params }: RouteParams) {
       status: p.status,
       createdAt: p.createdAt.toISOString(),
       author: p.user.name,
+      authorAvatar: p.user.avatarUrl,
       authorId: p.user.id,
       canModerate:
         session &&

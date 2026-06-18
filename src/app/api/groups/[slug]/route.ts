@@ -22,7 +22,7 @@ export async function GET(_request: Request, { params }: RouteParams) {
         orderBy: { createdAt: "desc" },
         take: 50,
         include: {
-          user: { select: { id: true, name: true } },
+          user: { select: { id: true, name: true, avatarUrl: true } },
         },
       },
     },
@@ -46,6 +46,7 @@ export async function GET(_request: Request, { params }: RouteParams) {
         content: p.content,
         createdAt: p.createdAt.toISOString(),
         author: p.user.name,
+        authorAvatar: p.user.avatarUrl,
         authorId: p.user.id,
         canModerate:
           session &&

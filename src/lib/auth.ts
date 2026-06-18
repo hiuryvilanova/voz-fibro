@@ -11,6 +11,7 @@ export interface SessionUser {
   name: string;
   role: string;
   state: string | null;
+  profileComplete: boolean;
 }
 
 function getSecret() {
@@ -36,6 +37,7 @@ export async function createSession(user: SessionUser) {
     name: user.name,
     role: user.role,
     state: user.state,
+    profileComplete: user.profileComplete,
   })
     .setProtectedHeader({ alg: "HS256" })
     .setExpirationTime("7d")
@@ -69,16 +71,20 @@ export async function getSession(): Promise<SessionUser | null> {
       name: payload.name as string,
       role: payload.role as string,
       state: (payload.state as string | null) ?? null,
+      profileComplete: payload.profileComplete !== false,
     };
   } catch {
     return null;
   }
 }
 
-export async function requireSession(): Promise<SessionUser> {
+export async function requireSession(requireCompleteProfile = true): Promise<SessionUser> {
   const session = await getSession();
   if (!session) {
     throw new Error("Não autenticado");
+  }
+  if (requireCompleteProfile && !session.profileComplete) {
+    throw new Error("Cadastro incompleto");
   }
   return session;
 }

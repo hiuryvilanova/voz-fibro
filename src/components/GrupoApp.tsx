@@ -2,12 +2,14 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { UserAvatar } from "@/components/UserAvatar";
 
 interface Post {
   id: string;
   content: string;
   createdAt: string;
   author: string;
+  authorAvatar?: string | null;
   canModerate?: boolean;
   status?: string;
 }
@@ -37,7 +39,16 @@ export function GrupoApp({ slug }: { slug: string }) {
   }
 
   useEffect(() => {
-    load();
+    let active = true;
+    fetch(`/api/groups/${slug}`)
+      .then((response) => response.json().then((data) => ({ ok: response.ok, data })))
+      .then(({ ok, data }) => {
+        if (!active) return;
+        if (ok) setGroup(data.group);
+        setLoading(false);
+      })
+      .catch(() => { if (active) setLoading(false); });
+    return () => { active = false; };
   }, [slug]);
 
   async function joinGroup() {
@@ -79,10 +90,6 @@ export function GrupoApp({ slug }: { slug: string }) {
 
   return (
     <div className="space-y-6">
-      <Link href="/comunidade" className="text-sm text-primary hover:underline">
-        ← Voltar à comunidade
-      </Link>
-
       <header>
         <h1 className="text-2xl font-bold">{group.name}</h1>
         <p className="mt-2 text-muted">{group.description}</p>
@@ -154,12 +161,13 @@ export function GrupoApp({ slug }: { slug: string }) {
                 key={post.id}
                 className="rounded-xl border border-border bg-surface p-4"
               >
-                <div className="flex items-start justify-between gap-2">
-                  <div>
-                    <p className="text-sm font-medium">{post.author}</p>
-                    <p className="text-xs text-muted">
-                      {new Date(post.createdAt).toLocaleString("pt-BR")}
-                    </p>
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex min-w-0 items-center gap-3">
+                    <UserAvatar name={post.author} src={post.authorAvatar} size="sm" />
+                    <div className="min-w-0">
+                      <p className="truncate text-sm font-bold">{post.author}</p>
+                      <p className="text-xs text-muted">{new Date(post.createdAt).toLocaleString("pt-BR")}</p>
+                    </div>
                   </div>
                   {post.canModerate && (
                     <button

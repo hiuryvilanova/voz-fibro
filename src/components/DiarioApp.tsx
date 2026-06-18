@@ -10,6 +10,7 @@ import {
   labelEscala,
   removerEntrada,
   salvarEntrada,
+  substituirEntradas,
 } from "@/lib/diario-storage";
 import { Disclaimer } from "@/components/Disclaimer";
 
@@ -69,54 +70,34 @@ export function DiarioApp() {
   const [form, setForm] = useState<EntradaDiario>(entradaVazia());
   const [modo, setModo] = useState<"novo" | "editar">("novo");
   const [mostrarRelatorio, setMostrarRelatorio] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [syncMsg, setSyncMsg] = useState("");
+  const [saveMessage, setSaveMessage] = useState("");
 
   useEffect(() => {
-    setEntradas(getEntradas());
-    fetch("/api/auth/me")
-      .then((r) => r.json())
-      .then((d) => setLoggedIn(!!d.user));
+    fetch("/api/diario")
+      .then((response) => response.json())
+      .then((data) => {
+        const cloudEntries: EntradaDiario[] = (data.entries ?? []).map((entry: Record<string, unknown>) => ({ id: String(entry.id), data: String(entry.date), dor: Number(entry.dor), sono: Number(entry.sono), fadiga: Number(entry.fadiga), humor: Number(entry.humor), medicamentos: String(entry.medicamentos ?? ""), atividadeFisica: String(entry.atividadeFisica ?? ""), crise: Boolean(entry.crise), gatilhos: String(entry.gatilhos ?? ""), alimentacao: String(entry.alimentacao ?? ""), observacoes: String(entry.observacoes ?? "") }));
+        if (cloudEntries.length > 0) {
+          substituirEntradas(cloudEntries);
+          setEntradas(cloudEntries);
+          return;
+        }
+        const localEntries = getEntradas();
+        setEntradas(localEntries);
+        if (localEntries.length > 0) {
+          void fetch("/api/diario", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ entries: localEntries }) });
+        }
+      })
+      .catch(() => setEntradas(getEntradas()));
   }, []);
 
-  async function syncNuvem() {
-    setSyncMsg("");
-    const res = await fetch("/api/diario", {
+  async function saveToAccount(entries: EntradaDiario[]) {
+    const response = await fetch("/api/diario", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ entries: getEntradas() }),
+      body: JSON.stringify({ entries }),
     });
-    const data = await res.json();
-    if (res.ok) setSyncMsg(`${data.synced} registros sincronizados na nuvem.`);
-    else setSyncMsg(data.error ?? "Erro ao sincronizar.");
-  }
-
-  async function carregarNuvem() {
-    setSyncMsg("");
-    const res = await fetch("/api/diario");
-    const data = await res.json();
-    if (!res.ok) {
-      setSyncMsg(data.error ?? "Erro ao carregar.");
-      return;
-    }
-    for (const e of data.entries ?? []) {
-      salvarEntrada({
-        id: e.id,
-        data: e.date,
-        dor: e.dor,
-        sono: e.sono,
-        fadiga: e.fadiga,
-        humor: e.humor,
-        medicamentos: e.medicamentos ?? "",
-        atividadeFisica: e.atividadeFisica ?? "",
-        crise: e.crise,
-        gatilhos: e.gatilhos ?? "",
-        alimentacao: e.alimentacao ?? "",
-        observacoes: e.observacoes ?? "",
-      });
-    }
-    setEntradas(getEntradas());
-    setSyncMsg(`${data.entries?.length ?? 0} registros carregados da nuvem.`);
+    if (!response.ok) throw new Error("Não foi possível salvar o registro.");
   }
 
   function atualizarForm<K extends keyof EntradaDiario>(
@@ -126,12 +107,20 @@ export function DiarioApp() {
     setForm((prev) => ({ ...prev, [campo]: valor }));
   }
 
-  function handleSalvar(e: React.FormEvent) {
+  async function handleSalvar(e: React.FormEvent) {
     e.preventDefault();
+    setSaveMessage("Salvando...");
     salvarEntrada(form);
-    setEntradas(getEntradas());
-    setForm(entradaVazia());
-    setModo("novo");
+    const nextEntries = getEntradas();
+    setEntradas(nextEntries);
+    try {
+      await saveToAccount(nextEntries);
+      setForm(entradaVazia());
+      setModo("novo");
+      setSaveMessage("Registro salvo na sua conta.");
+    } catch {
+      setSaveMessage("Não foi possível salvar na sua conta. Tente novamente.");
+    }
   }
 
   function handleEditar(entrada: EntradaDiario) {
@@ -140,10 +129,14 @@ export function DiarioApp() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  function handleRemover(id: string) {
+  async function handleRemover(id: string) {
     if (confirm("Remover este registro?")) {
+      const entry = entradas.find((item) => item.id === id);
       removerEntrada(id);
       setEntradas(getEntradas());
+      if (entry) {
+        await fetch("/api/diario", { method: "DELETE", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ date: entry.data }) });
+      }
       if (form.id === id) {
         setForm(entradaVazia());
         setModo("novo");
@@ -170,42 +163,6 @@ export function DiarioApp() {
   return (
     <div className="space-y-8">
       <Disclaimer variant="diario" />
-
-      {loggedIn ? (
-        <div className="rounded-xl border border-border bg-surface-2 p-4">
-          <p className="text-sm font-medium">Sincronização na nuvem</p>
-          <p className="mt-1 text-xs text-muted">
-            Com login, seus registros podem ser salvos no servidor com segurança.
-          </p>
-          <div className="mt-3 flex flex-wrap gap-2">
-            <button
-              type="button"
-              onClick={syncNuvem}
-              className="rounded-lg bg-primary px-3 py-2 text-xs font-semibold text-white hover:bg-primary-dark"
-            >
-              Enviar para nuvem
-            </button>
-            <button
-              type="button"
-              onClick={carregarNuvem}
-              className="rounded-lg border border-border px-3 py-2 text-xs font-medium hover:bg-surface"
-            >
-              Carregar da nuvem
-            </button>
-          </div>
-          {syncMsg && (
-            <p className="mt-2 text-xs text-muted">{syncMsg}</p>
-          )}
-        </div>
-      ) : (
-        <p className="text-xs text-muted">
-          <a href="/entrar" className="text-primary hover:underline">
-            Faça login
-          </a>{" "}
-          para sincronizar o diário na nuvem. Sem login, dados ficam apenas neste
-          dispositivo.
-        </p>
-      )}
 
       <form
         onSubmit={handleSalvar}
@@ -306,6 +263,7 @@ export function DiarioApp() {
         >
           {modo === "novo" ? "Salvar registro" : "Atualizar registro"}
         </button>
+        {saveMessage && <p role="status" className="text-sm font-semibold text-muted">{saveMessage}</p>}
       </form>
 
       <section>
@@ -390,10 +348,6 @@ export function DiarioApp() {
         </div>
       )}
 
-      <p className="text-xs text-muted">
-        Sem login, dados ficam no seu dispositivo. Com login, use a sincronização
-        na nuvem acima.
-      </p>
     </div>
   );
 }

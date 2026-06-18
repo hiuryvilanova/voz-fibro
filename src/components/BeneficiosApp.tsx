@@ -28,26 +28,26 @@ export function BeneficiosApp() {
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <p className="text-muted">Carregando benefícios...</p>;
+  if (loading) return <div className="rounded-lg border border-border bg-white p-8 text-lg font-semibold text-muted">Consultando benefícios disponíveis...</div>;
 
   return (
     <div className="space-y-6">
-      <div className="rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-950">
+      <div className="rounded-lg border border-amber-300 bg-amber-50 px-5 py-4 text-base leading-relaxed text-amber-950">
         {disclaimer}
       </div>
 
-      <ul className="grid gap-4 sm:grid-cols-2">
+      <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {benefits.map((b) => (
           <li
             key={b.id}
-            className="rounded-2xl border border-border bg-surface p-5"
+            className="rounded-lg border border-border bg-white p-6 shadow-sm"
           >
             <span className="rounded-full bg-secondary/15 px-2 py-0.5 text-xs font-medium text-secondary">
               {b.categoryLabel}
             </span>
-            <h3 className="mt-2 font-semibold">{b.title}</h3>
-            <p className="mt-1 text-sm text-muted">{b.partner}</p>
-            <p className="mt-2 text-sm">{b.description}</p>
+            <h3 className="mt-3 text-xl font-extrabold">{b.title}</h3>
+            <p className="mt-1 text-base font-semibold text-muted">{b.partner}</p>
+            <p className="mt-3 text-base leading-relaxed">{b.description}</p>
             {b.discount && (
               <p className="mt-2 text-sm font-medium text-primary">
                 {b.discount}

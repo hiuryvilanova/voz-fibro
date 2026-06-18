@@ -36,7 +36,7 @@ export function RelatorioMobilizacao() {
   return (
     <div className="space-y-8">
       <div className="rounded-2xl border border-border bg-surface p-6">
-        <h2 className="text-xl font-bold">Retrato Fibro Brasil — Piloto</h2>
+        <h2 className="text-xl font-bold">Retrato Fibro Brasil</h2>
         <p className="mt-2 text-sm text-muted">
           Dados agregados e anônimos · {report.totalResponses} respostas ·
           Atualizado em{" "}
@@ -127,7 +127,7 @@ export function RelatorioMobilizacao() {
         href="/mobilizacao"
         className="inline-block text-sm font-semibold text-primary hover:underline"
       >
-        ← Participar da pesquisa
+        Participar da pesquisa
       </Link>
     </div>
   );

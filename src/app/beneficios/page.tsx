@@ -1,22 +1,12 @@
 import type { Metadata } from "next";
 import { BeneficiosApp } from "@/components/BeneficiosApp";
+import { PageHero } from "@/components/PageHero";
 
-export const metadata: Metadata = {
-  title: "Benefícios",
-  description: "Cupons e parcerias responsáveis para membros Voz da Fibro.",
-};
+export const metadata: Metadata = { title: "Benefícios", description: "Parcerias responsáveis para membros Voz da Fibro." };
 
 export default function BeneficiosPage() {
-  return (
-    <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-14">
-      <h1 className="text-3xl font-bold">Benefícios responsáveis</h1>
-      <p className="mt-3 max-w-2xl text-muted leading-relaxed">
-        Cupons e parcerias com transparência. A plataforma informa preços e
-        benefícios — nunca prescreve tratamento nem indica medicamentos.
-      </p>
-      <div className="mt-8">
-        <BeneficiosApp />
-      </div>
-    </div>
-  );
+  return <div className="bg-background">
+    <PageHero eyebrow="Rede de cuidado" title="Benefícios responsáveis" description="Parcerias apresentadas com transparência, critérios claros e respeito às decisões individuais de cuidado." />
+    <div className="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:px-10 lg:py-13"><BeneficiosApp /></div>
+  </div>;
 }

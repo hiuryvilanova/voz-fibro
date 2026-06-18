@@ -43,6 +43,10 @@ export function removerEntrada(id: string): void {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(entradas));
 }
 
+export function substituirEntradas(entradas: EntradaDiario[]): void {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify([...entradas].sort((a, b) => b.data.localeCompare(a.data))));
+}
+
 export function gerarId(): string {
   return `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
 }
@@ -94,7 +98,7 @@ export function gerarRelatorioTexto(entradas: EntradaDiario[]): string {
     linhas.push("");
     linhas.push(`Data: ${formatarData(e.data)}`);
     linhas.push(`  Dor: ${e.dor}/10 | Sono: ${e.sono}/10 | Fadiga: ${e.fadiga}/10 | Humor: ${e.humor}/10`);
-    if (e.crise) linhas.push("  ⚠ Dia de crise");
+    if (e.crise) linhas.push("  ALERTA: Dia de crise");
     if (e.medicamentos) linhas.push(`  Medicamentos: ${e.medicamentos}`);
     if (e.atividadeFisica) linhas.push(`  Atividade física: ${e.atividadeFisica}`);
     if (e.gatilhos) linhas.push(`  Gatilhos: ${e.gatilhos}`);
@@ -105,7 +109,7 @@ export function gerarRelatorioTexto(entradas: EntradaDiario[]): string {
   linhas.push("");
   linhas.push("─".repeat(50));
   linhas.push("Voz da Fibro — Comunidade, Cuidado e Direitos");
-  linhas.push("vozdafibro.org.br (piloto)");
+  linhas.push("vozdafibro.org.br");
 
   return linhas.join("\n");
 }

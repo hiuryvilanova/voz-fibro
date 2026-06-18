@@ -4,16 +4,25 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "mysql"
 }
 
 model User {
   id        String   @id @default(cuid())
   email     String   @unique
   name      String
-  password  String
+  password  String?
   role      String   @default("member")
+  authProvider String @default("local")
+  googleId  String?  @unique
+  profileComplete Boolean @default(true)
   state     String?
+  city      String?
+  phone     String?
+  profession String?
+  cpfHash   String?  @unique
+  cpfLast4  String?
+  avatarUrl String?  @db.LongText
   createdAt DateTime @default(now())
 
   posts            Post[]

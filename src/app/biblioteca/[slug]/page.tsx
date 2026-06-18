@@ -58,14 +58,7 @@ export default async function ArtigoPage({ params }: PageProps) {
 
   return (
     <article className="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14">
-      <Link
-        href="/biblioteca"
-        className="text-sm font-medium text-primary hover:underline"
-      >
-        ← Voltar à biblioteca
-      </Link>
-
-      <header className="mt-6">
+      <header>
         <span className="inline-block rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
           {categoria.label}
         </span>
@@ -115,9 +108,9 @@ export default async function ArtigoPage({ params }: PageProps) {
         </p>
         <Link
           href="/diario"
-          className="mt-4 inline-block text-sm font-semibold text-primary hover:underline"
+          className="mt-4 inline-flex rounded-md bg-primary px-4 py-2 text-sm font-semibold text-white transition hover:bg-primary-dark"
         >
-          Abrir diário de sintomas →
+          Abrir diário de sintomas
         </Link>
       </footer>
     </article>

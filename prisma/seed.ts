@@ -1,55 +1,17 @@
-import "dotenv/config";
-import path from "path";
-import bcrypt from "bcryptjs";
-import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
+import { config } from "dotenv";
+import { PrismaMariaDb } from "@prisma/adapter-mariadb";
 import { PrismaClient } from "../src/generated/prisma/client";
 
-function resolveDatabaseUrl(): string {
-  const raw = process.env.DATABASE_URL ?? "file:./prisma/dev.db";
-  if (!raw.startsWith("file:")) return raw;
-  const filePath = raw.replace(/^file:/, "");
-  if (path.isAbsolute(filePath)) return raw;
-  const resolved = path.join(process.cwd(), filePath.replace(/^\.\//, ""));
-  return `file:${resolved}`;
-}
-
-const adapter = new PrismaBetterSqlite3({ url: resolveDatabaseUrl() });
+config({ path: ".env.local" });
+const databaseUrl = process.env.DATABASE_URL;
+if (!databaseUrl) throw new Error("DATABASE_URL não configurada");
+const url = new URL(databaseUrl);
+const adapter = new PrismaMariaDb({ host: url.hostname, port: Number(url.port || 3306), user: decodeURIComponent(url.username), password: decodeURIComponent(url.password), database: url.pathname.slice(1), connectionLimit: 2 });
 const prisma = new PrismaClient({ adapter });
 
 const ESTADOS = ["SP", "RJ", "PE", "DF", "MG", "RS", "BA", "PR", "SC", "GO"];
 
-async function hashPassword(password: string) {
-  return bcrypt.hash(password, 12);
-}
-
 async function main() {
-  const modPassword = await hashPassword("moderador123");
-  const adminPassword = await hashPassword("admin123");
-
-  const moderator = await prisma.user.upsert({
-    where: { email: "moderador@vozdafibro.org" },
-    update: {},
-    create: {
-      email: "moderador@vozdafibro.org",
-      name: "Equipe Moderação",
-      password: modPassword,
-      role: "moderator",
-      state: "DF",
-    },
-  });
-
-  await prisma.user.upsert({
-    where: { email: "admin@vozdafibro.org" },
-    update: {},
-    create: {
-      email: "admin@vozdafibro.org",
-      name: "Administrador",
-      password: adminPassword,
-      role: "admin",
-      state: "DF",
-    },
-  });
-
   const groups = [
     {
       slug: "mulheres-com-fibromialgia",
@@ -312,7 +274,6 @@ async function main() {
   }
 
   console.log("Seed concluído.");
-  console.log("Moderador:", moderator.email, "/ moderador123");
 }
 
 main()

@@ -22,7 +22,7 @@ function EscalaField({
 }) {
   return (
     <div>
-      <div className="flex justify-between text-sm">
+      <div className="flex justify-between text-base font-semibold">
         <label htmlFor={name}>{label}</label>
         <span className="text-muted">{value}/10</span>
       </div>
@@ -33,7 +33,7 @@ function EscalaField({
         max={10}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="mt-1 w-full accent-primary"
+        className="mt-3 w-full accent-primary"
       />
     </div>
   );
@@ -86,22 +86,24 @@ export function PesquisaMobilizacao() {
           href="/mobilizacao/relatorio"
           className="mt-4 inline-block text-sm font-semibold text-primary hover:underline"
         >
-          Ver relatório agregado →
+          Ver relatório agregado
         </Link>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5 rounded-2xl border border-border bg-surface p-6">
-      <label className="flex gap-3 text-sm leading-relaxed">
+    <form onSubmit={handleSubmit} className="space-y-7 rounded-lg border border-border bg-white p-6 shadow-sm sm:p-8">
+      <label className="flex gap-4 rounded-lg border border-emerald-200 bg-emerald-50 p-5 text-base leading-relaxed">
         <input
           type="checkbox"
           checked={form.consentGiven}
-          onChange={(e) =>
-            setForm({ ...form, consentGiven: e.target.checked })
-          }
-          className="mt-1 h-4 w-4 accent-primary"
+          onChange={(e) => {
+            e.currentTarget.setCustomValidity("");
+            setForm({ ...form, consentGiven: e.target.checked });
+          }}
+          onInvalid={(e) => e.currentTarget.setCustomValidity("Marque esta opção para autorizar sua participação.")}
+          className="mt-1 h-5 w-5 shrink-0 accent-primary"
           required
         />
         <span>
@@ -112,15 +114,19 @@ export function PesquisaMobilizacao() {
       </label>
 
       <div>
-        <label htmlFor="state" className="text-sm font-medium">
+        <label htmlFor="state" className="text-base font-bold">
           Estado
         </label>
         <select
           id="state"
           required
           value={form.state}
-          onChange={(e) => setForm({ ...form, state: e.target.value })}
-          className="mt-1 w-full rounded-lg border border-border px-3 py-2.5 text-sm"
+          onChange={(e) => {
+            e.currentTarget.setCustomValidity("");
+            setForm({ ...form, state: e.target.value });
+          }}
+          onInvalid={(e) => e.currentTarget.setCustomValidity("Selecione seu estado para continuar.")}
+          className="mt-2 w-full rounded-md border border-border px-4 py-3 text-base"
         >
           <option value="">Selecione</option>
           {ESTADOS.map((uf) => (
@@ -132,7 +138,7 @@ export function PesquisaMobilizacao() {
       </div>
 
       <div>
-        <label htmlFor="years" className="text-sm font-medium">
+        <label htmlFor="years" className="text-base font-bold">
           Anos desde o diagnóstico (ou suspeita)
         </label>
         <input
@@ -147,7 +153,7 @@ export function PesquisaMobilizacao() {
               yearsSinceDiagnosis: Number(e.target.value),
             })
           }
-          className="mt-1 w-full rounded-lg border border-border px-3 py-2.5 text-sm"
+          className="mt-2 w-full rounded-md border border-border px-4 py-3 text-base"
         />
       </div>
 
@@ -177,7 +183,7 @@ export function PesquisaMobilizacao() {
       />
 
       <div>
-        <label htmlFor="difficulties" className="text-sm font-medium">
+        <label htmlFor="difficulties" className="text-base font-bold">
           Principal dificuldade (opcional)
         </label>
         <textarea
@@ -188,16 +194,16 @@ export function PesquisaMobilizacao() {
             setForm({ ...form, mainDifficulties: e.target.value })
           }
           placeholder="Ex.: demora no diagnóstico, falta de especialista..."
-          className="mt-1 w-full rounded-lg border border-border px-3 py-2.5 text-sm resize-y"
+          className="mt-2 w-full resize-y rounded-md border border-border px-4 py-3 text-base"
         />
       </div>
 
-      {error && <p className="text-sm text-accent">{error}</p>}
+      {error && <p className="rounded-md bg-red-50 px-4 py-3 text-base font-semibold text-accent">{error}</p>}
 
       <button
         type="submit"
         disabled={loading}
-        className="w-full rounded-xl bg-primary py-3 text-sm font-semibold text-white hover:bg-primary-dark disabled:opacity-60"
+        className="w-full rounded-md bg-primary py-4 text-lg font-bold text-white shadow-sm hover:bg-primary-dark disabled:opacity-60"
       >
         {loading ? "Enviando..." : "Enviar pesquisa"}
       </button>

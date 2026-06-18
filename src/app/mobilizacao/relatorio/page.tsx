@@ -3,7 +3,7 @@ import { RelatorioMobilizacao } from "@/components/RelatorioMobilizacao";
 
 export const metadata: Metadata = {
   title: "Retrato Fibro Brasil",
-  description: "Relatório agregado com dados da pesquisa nacional piloto.",
+  description: "Relatório agregado com dados da pesquisa nacional.",
 };
 
 export default function RelatorioPage() {

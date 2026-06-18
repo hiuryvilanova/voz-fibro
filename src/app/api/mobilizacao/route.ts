@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { getSession } from "@/lib/auth";
+import { requireSession } from "@/lib/auth";
 import { jsonError, jsonOk } from "@/lib/api";
 
 const ESTADOS = [
@@ -61,7 +61,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    const session = await getSession();
+    const session = await requireSession();
     const body = await request.json();
 
     if (!body.consentGiven) {

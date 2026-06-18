@@ -14,7 +14,7 @@ export async function POST(request: Request) {
       where: { email: email.toLowerCase().trim() },
     });
 
-    if (!user || !(await verifyPassword(password, user.password))) {
+    if (!user || !user.password || !(await verifyPassword(password, user.password))) {
       return jsonError("E-mail ou senha incorretos.", 401);
     }
 
@@ -24,6 +24,7 @@ export async function POST(request: Request) {
       name: user.name,
       role: user.role,
       state: user.state,
+      profileComplete: user.profileComplete,
     });
 
     return jsonOk({
@@ -33,6 +34,7 @@ export async function POST(request: Request) {
         name: user.name,
         role: user.role,
         state: user.state,
+        profileComplete: user.profileComplete,
       },
     });
   } catch {

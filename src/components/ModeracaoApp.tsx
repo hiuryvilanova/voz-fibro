@@ -39,7 +39,24 @@ export function ModeracaoApp() {
   }
 
   useEffect(() => {
-    load();
+    let active = true;
+    async function initialLoad() {
+      const groupsRes = await fetch("/api/groups");
+      const groupsData = await groupsRes.json();
+      const allPosts: FlaggedPost[] = [];
+      for (const group of groupsData.groups ?? []) {
+        const response = await fetch(`/api/groups/${group.slug}/posts`);
+        if (!response.ok) continue;
+        const data = await response.json();
+        for (const post of data.posts ?? []) allPosts.push({ ...post, groupName: group.name, groupSlug: group.slug });
+      }
+      if (active) {
+        setPosts(allPosts);
+        setLoading(false);
+      }
+    }
+    void initialLoad();
+    return () => { active = false; };
   }, []);
 
   async function setStatus(id: string, status: string) {
