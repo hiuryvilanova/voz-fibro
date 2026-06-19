@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     template: "%s | Voz da Fibro",
   },
   description: "Plataforma de acolhimento, informação confiável e mobilização social para pessoas com fibromialgia em Brasília e regiões administrativas do DF.",
-  keywords: ["fibromialgia", "Voz da Fibro", "dor crônica", "saúde", "comunidade", "direitos"],
+  keywords: ["fibromialgia", "Voz da Fibro", "dor crônica", "saúde", "comunidade", "direitos", "Brasília", "Distrito Federal"],
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

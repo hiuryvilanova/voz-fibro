@@ -6,7 +6,7 @@ import { getSession } from "@/lib/auth";
 
 export const metadata: Metadata = {
   title: "Diário de sintomas",
-  description: "Registre dor, sono, fadiga e humor e prepare um histórico para a consulta.",
+  description: "Registre dor, sono, fadiga e humor e prepare um histórico para a consulta no SUS ou na rede privada em Brasília.",
 };
 
 export default async function DiarioPage() {

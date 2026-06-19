@@ -21,7 +21,7 @@ export default async function PerfilPage() {
 
   return (
     <div className="bg-background">
-      <PageHero eyebrow="Área pessoal" title="Meu perfil" description="Mantenha seus dados atualizados para receber informações e encontrar serviços adequados à sua região." />
+      <PageHero eyebrow="Área pessoal" title="Meu perfil" description="Mantenha seus dados atualizados para receber informações e encontrar serviços adequados à sua região administrativa em Brasília." />
       <div className="mx-auto max-w-4xl px-5 py-10 sm:px-8 lg:py-13">
         <ProfileForm initialData={{
           name: user.name,

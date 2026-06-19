@@ -36,7 +36,7 @@ export default function PilaresPage() {
 
         <section className="mt-12 rounded-lg border border-emerald-200 bg-emerald-50 p-6 sm:p-8">
           <h2 className="text-3xl font-extrabold text-foreground">Conheça os serviços da plataforma</h2>
-          <p className="mt-3 max-w-3xl text-lg leading-relaxed text-muted">Acesse conteúdos, registre sintomas, participe da comunidade e encontre redes de apoio em diferentes regiões.</p>
+          <p className="mt-3 max-w-3xl text-lg leading-relaxed text-muted">Acesse conteúdos, registre sintomas, participe da comunidade e encontre redes de apoio nas regiões administrativas de Brasília.</p>
           <div className="mt-7 flex flex-wrap gap-3">
             <Link href="/biblioteca" className="rounded-md bg-primary px-6 py-3 font-bold text-white">Explorar a biblioteca</Link>
             <Link href="/diario" className="rounded-md border border-primary bg-white px-6 py-3 font-bold text-primary">Conhecer o diário</Link>

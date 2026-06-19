@@ -4,13 +4,13 @@ import { Disclaimer } from "@/components/Disclaimer";
 import { PageHero } from "@/components/PageHero";
 import { artigos, CATEGORIAS, type ArtigoCategoria } from "@/data/artigos";
 
-export const metadata: Metadata = { title: "Biblioteca", description: "Conteúdos revisados sobre fibromialgia, direitos, tratamento e cuidado." };
+export const metadata: Metadata = { title: "Biblioteca", description: "Conteúdos revisados sobre fibromialgia, direitos, tratamento e cuidado para moradores de Brasília." };
 
 export default function BibliotecaPage() {
   const categorias = Object.keys(CATEGORIAS) as ArtigoCategoria[];
   return (
     <div className="bg-background">
-      <PageHero eyebrow="Conhecimento para o cuidado" title="Biblioteca" description="Informação acessível para compreender a fibromialgia, preparar consultas, conhecer direitos e tomar decisões com mais segurança." />
+      <PageHero eyebrow="Conhecimento para o cuidado" title="Biblioteca" description="Informação acessível para compreender a fibromialgia, preparar consultas, conhecer direitos e tomar decisões com mais segurança no contexto do Distrito Federal." />
       <div className="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:px-10 lg:py-13">
         <div className="grid gap-4 sm:grid-cols-3">
           <div className="rounded-lg border border-border bg-white p-5 shadow-sm"><strong className="text-3xl text-primary">{artigos.length}</strong><p className="mt-1 text-muted">conteúdos disponíveis</p></div>

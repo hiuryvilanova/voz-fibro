@@ -17,7 +17,7 @@ export default async function RodasPage() {
           <p className="text-sm font-bold uppercase tracking-wider text-primary">Encontros online</p>
           <h1 className="mt-2 text-3xl font-bold text-foreground sm:text-4xl">Rodas de conversa</h1>
           <p className="mt-5 max-w-3xl text-lg leading-relaxed text-muted">
-            Conversas ao vivo com profissionais e pessoas que convivem com a fibromialgia. Um espaço para aprender, compartilhar experiências e fortalecer sua rede de apoio.
+            Conversas ao vivo com profissionais e pessoas que convivem com a fibromialgia em Brasília. Um espaço para aprender, compartilhar experiências e fortalecer sua rede de apoio no DF.
           </p>
         </div>
       </section>
