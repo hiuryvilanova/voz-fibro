@@ -6,12 +6,12 @@ import { PageHero } from "@/components/PageHero";
 import { getSession } from "@/lib/auth";
 import { ServiceIcon, type ServiceIconName } from "@/components/ServiceIcon";
 
-export const metadata: Metadata = { title: "Mobilização social", description: "Participe da pesquisa e contribua para o Retrato Fibro Brasil." };
+export const metadata: Metadata = { title: "Mobilização social", description: "Participe da pesquisa e contribua para o Retrato Fibro Brasília." };
 
 const impacts = [
   { icon: "participation" as ServiceIconName, title: "Produzir evidências", text: "Reunir dados agregados sobre diagnóstico, acesso ao cuidado e impacto na vida cotidiana." },
   { icon: "institution" as ServiceIconName, title: "Apoiar políticas públicas", text: "Transformar experiências em informações úteis para debates, campanhas e decisões públicas." },
-  { icon: "megaphone" as ServiceIconName, title: "Ampliar a voz", text: "Dar visibilidade nacional às necessidades de pessoas com fibromialgia e suas famílias." },
+  { icon: "megaphone" as ServiceIconName, title: "Ampliar a voz", text: "Dar visibilidade às necessidades de pessoas com fibromialgia em Brasília e nas regiões administrativas do DF." },
 ];
 
 export default async function MobilizacaoPage() {
@@ -21,8 +21,8 @@ export default async function MobilizacaoPage() {
       <PageHero
         eyebrow="Participação cidadã"
         title="Mobilização social"
-        description="Sua experiência pode ajudar a revelar os desafios da fibromialgia no Brasil e orientar ações de cuidado, garantia de direitos e participação social."
-        actions={<Link href="/mobilizacao/relatorio" className="rounded-md border border-primary bg-white px-6 py-3 font-bold text-primary hover:bg-surface-2">Consultar o Retrato Fibro Brasil</Link>}
+        description="Sua experiência pode ajudar a revelar os desafios da fibromialgia em Brasília e orientar ações de cuidado, garantia de direitos e participação social no DF."
+        actions={<Link href="/mobilizacao/relatorio" className="rounded-md border border-primary bg-white px-6 py-3 font-bold text-primary hover:bg-surface-2">Consultar o Retrato Fibro Brasília</Link>}
       />
 
       <section className="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:px-10 lg:py-13">
@@ -40,7 +40,7 @@ export default async function MobilizacaoPage() {
 
         <div className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_340px]">
           <section>
-            <p className="text-sm font-extrabold uppercase tracking-wider text-primary">Levantamento nacional</p>
+            <p className="text-sm font-extrabold uppercase tracking-wider text-primary">Levantamento no DF</p>
             <h2 className="mt-2 text-3xl font-extrabold text-foreground">Envie sua contribuição</h2>
             <p className="mt-3 max-w-3xl text-lg leading-relaxed text-muted">O preenchimento leva poucos minutos. As respostas são analisadas de forma agregada para evitar a identificação individual.</p>
 

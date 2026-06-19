@@ -14,7 +14,7 @@ export function Footer() {
                 <p className="text-xs text-muted">Comunidade, Cuidado e Direitos</p>
               </div>
             </div>
-            <p className="mt-5 text-sm leading-relaxed text-muted">Informação, acolhimento e participação social para pessoas com fibromialgia em todo o Brasil.</p>
+            <p className="mt-5 text-sm leading-relaxed text-muted">Informação, acolhimento e participação social para pessoas com fibromialgia em Brasília e no Distrito Federal.</p>
           </div>
 
           <div>

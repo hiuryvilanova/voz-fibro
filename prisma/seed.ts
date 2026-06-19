@@ -1,6 +1,7 @@
 import { config } from "dotenv";
 import { PrismaMariaDb } from "@prisma/adapter-mariadb";
 import { PrismaClient } from "../src/generated/prisma/client";
+import { DF_ADMIN_REGIONS } from "../src/lib/df-regions";
 
 config({ path: ".env.local" });
 const databaseUrl = process.env.DATABASE_URL;
@@ -8,8 +9,6 @@ if (!databaseUrl) throw new Error("DATABASE_URL não configurada");
 const url = new URL(databaseUrl);
 const adapter = new PrismaMariaDb({ host: url.hostname, port: Number(url.port || 3306), user: decodeURIComponent(url.username), password: decodeURIComponent(url.password), database: url.pathname.slice(1), connectionLimit: 2 });
 const prisma = new PrismaClient({ adapter });
-
-const ESTADOS = ["SP", "RJ", "PE", "DF", "MG", "RS", "BA", "PR", "SC", "GO"];
 
 async function main() {
   const groups = [
@@ -51,27 +50,59 @@ async function main() {
       rules: "Escuta e empatia. Não minimize a dor alheia.",
     },
     {
-      slug: "pernambuco",
-      name: "Grupo de Pernambuco",
-      description: "Conexão local para pessoas com fibromialgia em Pernambuco.",
+      slug: "plano-piloto",
+      name: "Grupo Plano Piloto",
+      description: "Comunidade local para quem vive no coração de Brasília.",
       category: "regiao",
-      state: "PE",
+      state: "Plano Piloto",
       rules: "Indicações de serviços devem ser verificáveis.",
     },
     {
-      slug: "sao-paulo",
-      name: "Grupo de São Paulo",
-      description: "Rede de apoio para pessoas com fibromialgia em São Paulo.",
+      slug: "taguatinga",
+      name: "Grupo Taguatinga",
+      description: "Rede de apoio para pessoas com fibromialgia em Taguatinga.",
       category: "regiao",
-      state: "SP",
+      state: "Taguatinga",
       rules: "Indicações de serviços devem ser verificáveis.",
     },
     {
-      slug: "distrito-federal",
-      name: "Grupo do Distrito Federal",
-      description: "Comunidade local para o DF e entorno.",
+      slug: "ceilandia",
+      name: "Grupo Ceilândia",
+      description: "Conexão comunitária para moradores de Ceilândia.",
       category: "regiao",
-      state: "DF",
+      state: "Ceilândia",
+      rules: "Indicações de serviços devem ser verificáveis.",
+    },
+    {
+      slug: "samambaia",
+      name: "Grupo Samambaia",
+      description: "Espaço de acolhimento e informação em Samambaia.",
+      category: "regiao",
+      state: "Samambaia",
+      rules: "Indicações de serviços devem ser verificáveis.",
+    },
+    {
+      slug: "aguas-claras",
+      name: "Grupo Águas Claras",
+      description: "Rede local para Águas Claras e entorno.",
+      category: "regiao",
+      state: "Águas Claras",
+      rules: "Indicações de serviços devem ser verificáveis.",
+    },
+    {
+      slug: "gama",
+      name: "Grupo Gama",
+      description: "Comunidade para trocar experiências no Gama.",
+      category: "regiao",
+      state: "Gama",
+      rules: "Indicações de serviços devem ser verificáveis.",
+    },
+    {
+      slug: "sobradinho-planaltina",
+      name: "Grupo Sobradinho e Planaltina",
+      description: "Articulação comunitária nas regiões do extremo norte do DF.",
+      category: "regiao",
+      state: "Sobradinho",
       rules: "Indicações de serviços devem ser verificáveis.",
     },
   ];
@@ -131,72 +162,86 @@ async function main() {
 
   const locations = [
     {
-      name: "Associação Brasileira de Fibromialgia e Dor Crônica",
-      type: "associacao",
-      state: "SP",
-      city: "São Paulo",
-      website: "https://www.abfdc.org.br",
-      description: "Articulação nacional de pacientes e campanhas.",
-      verified: true,
-    },
-    {
-      name: "Hospital das Clínicas — Ambulatório de Reumatologia",
-      type: "sus",
-      state: "SP",
-      city: "São Paulo",
-      address: "Av. Dr. Enéas de Carvalho Aguiar, 255",
-      description: "Referência em reumatologia pelo SUS.",
-      verified: true,
-    },
-    {
-      name: "Centro de Referência em Fibromialgia — PE",
-      type: "sus",
-      state: "PE",
-      city: "Recife",
-      description: "Atendimento especializado na rede estadual.",
-      verified: true,
-    },
-    {
       name: "Hospital Universitário de Brasília — Reumatologia",
       type: "sus",
       state: "DF",
-      city: "Brasília",
-      description: "Atendimento pelo SUS no Distrito Federal.",
+      city: "Plano Piloto",
+      description: "Atendimento especializado pelo SUS no Distrito Federal.",
       verified: true,
     },
     {
-      name: "Projeto Movimento e Dor — Hidroginástica",
+      name: "Rede de atenção básica — Taguatinga",
+      type: "sus",
+      state: "DF",
+      city: "Taguatinga",
+      description: "Primeiro contato com a rede pública e encaminhamento para especialistas.",
+      verified: true,
+    },
+    {
+      name: "Grupo de acolhimento Ceilândia",
+      type: "grupo_apoio",
+      state: "DF",
+      city: "Ceilândia",
+      description: "Encontros presenciais e online para pacientes e familiares.",
+      verified: true,
+    },
+    {
+      name: "Associação de pacientes — Samambaia",
+      type: "associacao",
+      state: "DF",
+      city: "Samambaia",
+      description: "Informação sobre direitos, campanhas e articulação comunitária.",
+      verified: true,
+    },
+    {
+      name: "Núcleo de reabilitação e movimento",
       type: "academia",
-      state: "RJ",
-      city: "Rio de Janeiro",
+      state: "DF",
+      city: "Águas Claras",
       description: "Exercício supervisionado para dor crônica.",
       verified: false,
     },
     {
-      name: "Grupo de Apoio FibroVida",
+      name: "Ambulatório de atenção à dor persistente",
+      type: "sus",
+      state: "DF",
+      city: "Gama",
+      description: "Avaliação clínica e cuidado compartilhado com a atenção básica.",
+      verified: true,
+    },
+    {
+      name: "Rede de convivência Sobradinho",
       type: "grupo_apoio",
-      state: "MG",
-      city: "Belo Horizonte",
-      phone: "(31) 3000-0000",
+      state: "DF",
+      city: "Sobradinho",
+      phone: "(61) 3000-0000",
       description: "Encontros mensais presenciais e online.",
       verified: true,
     },
     {
-      name: "Clínica Integrada de Dor Crônica",
+      name: "Clínica integrada de dor crônica",
       type: "clinica",
-      state: "RS",
-      city: "Porto Alegre",
-      address: "Centro — atendimento multidisciplinar",
+      state: "DF",
+      city: "Lago Sul",
+      address: "Atendimento multidisciplinar",
       description: "Fisioterapia, psicologia e nutrição.",
       verified: false,
     },
     {
-      name: "Farmácia Popular — Unidade Centro",
+      name: "Farmácia Popular — Planaltina",
       type: "farmacia",
-      state: "BA",
-      city: "Salvador",
+      state: "DF",
+      city: "Planaltina",
       description: "Medicamentos com preços reduzidos pelo programa federal.",
       verified: true,
+    },
+    {
+      name: "Movimento Planaltina pela saúde",
+      type: "associacao",
+      state: "DF",
+      city: "Planaltina",
+      description: "Mobilização, educação em saúde e apoio à participação social.",
+      verified: false,
     },
   ];
 
@@ -256,7 +301,7 @@ async function main() {
     for (let i = 0; i < 40; i++) {
       samples.push({
         consentGiven: true,
-        state: ESTADOS[i % ESTADOS.length],
+        state: DF_ADMIN_REGIONS[i % DF_ADMIN_REGIONS.length],
         yearsSinceDiagnosis: (i % 15) + 1,
         susDifficulty: (i % 8) + 3,
         workImpact: (i % 9) + 2,

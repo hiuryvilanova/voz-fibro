@@ -9,7 +9,7 @@ const quickAccess: Array<{ icon: ServiceIconName; title: string; description: st
   { icon: "clipboard", title: "Acompanhar sintomas", description: "Organize seu histórico para conversar com a equipe de saúde", href: "/diario" },
   { icon: "community", title: "Comunidade e acolhimento", description: "Participe de grupos moderados e redes de apoio", href: "/comunidade" },
   { icon: "conversation", title: "Rodas de conversa", description: "Encontros online com profissionais e comunidade", href: "/rodas" },
-  { icon: "location", title: "Serviços perto de você", description: "Consulte pontos de apoio em diferentes regiões", href: "/mapa" },
+  { icon: "location", title: "Serviços perto de você", description: "Consulte pontos de apoio nas regiões administrativas do DF", href: "/mapa" },
   { icon: "rights", title: "Direitos e benefícios", description: "Orientações sobre trabalho, SUS e proteção social", href: "/biblioteca" },
   { icon: "participation", title: "Participação social", description: "Contribua com pesquisas e ações de mobilização", href: "/mobilizacao" },
   { icon: "institution", title: "Conheça a iniciativa", description: "Saiba como a plataforma organiza cuidado e governança", href: "/pilares" },
@@ -34,7 +34,7 @@ const highlights = [
     image: "/images/portal/bem-estar.jpg",
     category: "Direitos",
     title: "Onde buscar orientação e apoio perto de você",
-    description: "Consulte associações, serviços públicos, eventos e iniciativas por região.",
+    description: "Consulte associações, serviços públicos, eventos e iniciativas por região administrativa.",
     href: "/mapa",
   },
 ];
@@ -82,12 +82,12 @@ export default function HomePage() {
       <section className="border-b border-border section-green">
         <div className="mx-auto grid max-w-7xl gap-8 px-5 py-12 sm:px-8 lg:grid-cols-[1fr_1.15fr] lg:px-10 lg:py-14">
           <div>
-            <p className="text-sm font-extrabold uppercase tracking-wider text-primary">Alcance nacional</p>
-            <h2 className="mt-2 text-3xl font-extrabold text-foreground">Uma plataforma pensada para diferentes realidades do Brasil</h2>
-            <p className="mt-4 text-lg leading-relaxed text-muted">Informação e participação precisam chegar a capitais, cidades do interior e pessoas com diferentes níveis de acesso digital.</p>
+            <p className="text-sm font-extrabold uppercase tracking-wider text-primary">Brasília e entorno</p>
+            <h2 className="mt-2 text-3xl font-extrabold text-foreground">Uma plataforma pensada para quem vive no Distrito Federal</h2>
+            <p className="mt-4 text-lg leading-relaxed text-muted">Informação e participação chegam a todas as regiões administrativas de Brasília, respeitando as diferentes realidades do Plano Piloto às cidades satélites.</p>
           </div>
           <div className="grid grid-cols-2 gap-4">
-            {[{ value: "5", label: "regiões contempladas" }, { value: "27", label: "unidades federativas" }, { value: "24h", label: "acesso à informação" }, { value: "LGPD", label: "proteção desde o cadastro" }].map((item) => (
+            {[{ value: "34", label: "regiões administrativas" }, { value: "DF", label: "Distrito Federal" }, { value: "24h", label: "acesso à informação" }, { value: "LGPD", label: "proteção desde o cadastro" }].map((item) => (
               <div key={item.label} className="rounded-lg border border-emerald-200 bg-white p-5 shadow-sm"><strong className="text-3xl font-extrabold text-secondary">{item.value}</strong><p className="mt-2 font-semibold text-muted">{item.label}</p></div>
             ))}
           </div>
@@ -179,11 +179,11 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-5 py-12 sm:px-8 lg:px-10 lg:py-14">
           <p className="text-sm font-extrabold uppercase tracking-wider text-primary">Agenda de participação</p>
           <h2 className="mt-2 text-3xl font-extrabold text-foreground">Próximas ações</h2>
-          <p className="mt-3 max-w-3xl text-lg leading-relaxed text-muted">Acompanhe encontros, pesquisas e atividades que fortalecem a rede nacional de apoio.</p>
+          <p className="mt-3 max-w-3xl text-lg leading-relaxed text-muted">Acompanhe encontros, pesquisas e atividades que fortalecem a rede de apoio em Brasília.</p>
           <div className="mt-8 grid gap-5 md:grid-cols-3">
             {[
               { icon: "conversation" as ServiceIconName, title: "Rodas de conversa", text: "Encontros online sobre diagnóstico, saúde emocional, direitos e rede de apoio.", href: "/rodas", action: "Consultar agenda" },
-              { icon: "participation" as ServiceIconName, title: "Pesquisa nacional", text: "Contribua para o Retrato Fibro Brasil e ajude a qualificar o debate público.", href: "/mobilizacao", action: "Participar da pesquisa" },
+              { icon: "participation" as ServiceIconName, title: "Pesquisa local", text: "Contribua para o Retrato Fibro Brasília e ajude a qualificar o debate público no DF.", href: "/mobilizacao", action: "Participar da pesquisa" },
               { icon: "community" as ServiceIconName, title: "Comunidade moderada", text: "Grupos temáticos e regionais para acolhimento e troca de experiências.", href: "/comunidade", action: "Conhecer os grupos" },
             ].map((item) => <article key={item.title} className="rounded-lg border border-border bg-white p-6"><span className="flex h-12 w-12 items-center justify-center rounded-lg border border-sky-200 bg-sky-50 text-info"><ServiceIcon name={item.icon} /></span><h3 className="mt-4 text-2xl font-extrabold text-foreground">{item.title}</h3><p className="mt-3 text-base leading-relaxed text-muted">{item.text}</p><Link href={item.href} className="mt-6 inline-flex rounded-md bg-primary px-5 py-3 font-bold text-white">{item.action}</Link></article>)}
           </div>

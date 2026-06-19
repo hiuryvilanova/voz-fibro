@@ -1,6 +1,7 @@
 import { createHmac } from "crypto";
+import { DF_STATE, isDfAdminRegion } from "@/lib/df-regions";
 
-export const BRAZIL_STATES = ["AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"];
+export const BRAZIL_STATES = [DF_STATE];
 
 export function onlyDigits(value: string) {
   return value.replace(/\D/g, "");
@@ -38,8 +39,8 @@ export function validateProfile(input: Record<string, unknown>) {
   const cpf = onlyDigits(String(input.cpf ?? ""));
 
   if (name.length < 3) return { error: "Informe seu nome completo." };
-  if (!BRAZIL_STATES.includes(state)) return { error: "Selecione um estado válido." };
-  if (city.length < 2) return { error: "Informe sua cidade." };
+  if (state !== DF_STATE) return { error: "A plataforma atende residentes do Distrito Federal." };
+  if (!isDfAdminRegion(city)) return { error: "Selecione sua região administrativa." };
   if (phone.length < 10 || phone.length > 11) return { error: "Informe um telefone válido com DDD." };
   if (profession.length < 2) return { error: "Informe sua profissão ou ocupação." };
   if (!isValidCpf(cpf)) return { error: "CPF inválido." };
@@ -55,8 +56,8 @@ export function validateEditableProfile(input: Record<string, unknown>) {
   const profession = String(input.profession ?? "").trim();
 
   if (name.length < 3) return { error: "Informe seu nome completo." };
-  if (!BRAZIL_STATES.includes(state)) return { error: "Selecione um estado válido." };
-  if (city.length < 2) return { error: "Informe sua cidade." };
+  if (state !== DF_STATE) return { error: "A plataforma atende residentes do Distrito Federal." };
+  if (!isDfAdminRegion(city)) return { error: "Selecione sua região administrativa." };
   if (phone.length < 10 || phone.length > 11) return { error: "Informe um telefone válido com DDD." };
   if (profession.length < 2) return { error: "Informe sua profissão ou ocupação." };
 

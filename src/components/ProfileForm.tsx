@@ -3,8 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { UserAvatar } from "@/components/UserAvatar";
-
-const ESTADOS = ["AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"];
+import { DF_ADMIN_REGIONS, DF_STATE } from "@/lib/df-regions";
 
 interface ProfileData {
   name: string;
@@ -87,7 +86,7 @@ export function ProfileForm({ initialData }: { initialData: ProfileData }) {
       const response = await fetch("/api/profile", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, avatarUrl }),
+        body: JSON.stringify({ ...form, state: DF_STATE, avatarUrl }),
       });
       const data = await response.json();
       if (!response.ok) {
@@ -120,8 +119,8 @@ export function ProfileForm({ initialData }: { initialData: ProfileData }) {
         <div className="sm:col-span-2"><label htmlFor="profile-name" className="font-bold">Nome completo</label><input id="profile-name" required autoComplete="name" value={form.name} onChange={(event) => update("name", event.target.value)} className={inputClass} /></div>
         <div><label htmlFor="profile-email" className="font-bold">E-mail</label><input id="profile-email" value={initialData.email} readOnly aria-readonly="true" className={lockedClass} /><p className="mt-1.5 text-sm text-muted">O e-mail da conta não pode ser alterado.</p></div>
         <div><label htmlFor="profile-cpf" className="font-bold">CPF</label><input id="profile-cpf" value={initialData.cpf} readOnly aria-readonly="true" className={lockedClass} /><p className="mt-1.5 text-sm text-muted">O CPF permanece protegido e não pode ser alterado.</p></div>
-        <div><label htmlFor="profile-state" className="font-bold">Estado</label><select id="profile-state" required value={form.state} onChange={(event) => { event.currentTarget.setCustomValidity(""); update("state", event.target.value); }} onInvalid={(event) => event.currentTarget.setCustomValidity("Selecione seu estado para continuar.")} className={inputClass}><option value="">Selecione</option>{ESTADOS.map((state) => <option key={state}>{state}</option>)}</select></div>
-        <div><label htmlFor="profile-city" className="font-bold">Cidade</label><input id="profile-city" required autoComplete="address-level2" value={form.city} onChange={(event) => update("city", event.target.value)} className={inputClass} /></div>
+        <div><label htmlFor="profile-state" className="font-bold">Distrito Federal</label><input id="profile-state" readOnly value="Distrito Federal (DF)" className={lockedClass} /></div>
+        <div><label htmlFor="profile-city" className="font-bold">Região administrativa</label><select id="profile-city" required value={form.city} onChange={(event) => { event.currentTarget.setCustomValidity(""); update("city", event.target.value); }} onInvalid={(event) => event.currentTarget.setCustomValidity("Selecione sua região administrativa para continuar.")} className={inputClass}><option value="">Selecione</option>{DF_ADMIN_REGIONS.map((ra) => <option key={ra} value={ra}>{ra}</option>)}</select></div>
         <div><label htmlFor="profile-phone" className="font-bold">Telefone com DDD</label><input id="profile-phone" required type="tel" inputMode="numeric" autoComplete="tel" maxLength={15} placeholder="(00) 00000-0000" value={form.phone} onChange={(event) => update("phone", maskPhone(event.target.value))} className={inputClass} /></div>
         <div><label htmlFor="profile-profession" className="font-bold">Profissão ou ocupação</label><input id="profile-profession" required autoComplete="organization-title" value={form.profession} onChange={(event) => update("profession", event.target.value)} className={inputClass} /></div>
       </div>

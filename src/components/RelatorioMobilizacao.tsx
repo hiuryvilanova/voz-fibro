@@ -36,7 +36,7 @@ export function RelatorioMobilizacao() {
   return (
     <div className="space-y-8">
       <div className="rounded-2xl border border-border bg-surface p-6">
-        <h2 className="text-xl font-bold">Retrato Fibro Brasil</h2>
+        <h2 className="text-xl font-bold">Retrato Fibro Brasília</h2>
         <p className="mt-2 text-sm text-muted">
           Dados agregados e anônimos · {report.totalResponses} respostas ·
           Atualizado em{" "}
@@ -80,7 +80,7 @@ export function RelatorioMobilizacao() {
       </section>
 
       <section>
-        <h3 className="text-lg font-semibold">Participantes por estado</h3>
+        <h3 className="text-lg font-semibold">Participantes por região administrativa</h3>
         <ul className="mt-4 space-y-2">
           {report.byState.map((s) => (
             <li key={s.state} className="flex items-center gap-3">

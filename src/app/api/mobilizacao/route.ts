@@ -1,12 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { requireSession } from "@/lib/auth";
 import { jsonError, jsonOk } from "@/lib/api";
-
-const ESTADOS = [
-  "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA",
-  "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN",
-  "RS", "RO", "RR", "SC", "SP", "SE", "TO",
-];
+import { DF_ADMIN_REGIONS, isDfAdminRegion } from "@/lib/df-regions";
 
 export async function GET() {
   const responses = await prisma.surveyResponse.findMany({
@@ -43,9 +38,9 @@ export async function GET() {
 
   return jsonOk({
     totalResponses: responses.length,
-    byState: ESTADOS.map((uf) => ({
-      state: uf,
-      count: byState[uf] ?? 0,
+    byState: DF_ADMIN_REGIONS.map((region) => ({
+      state: region,
+      count: byState[region] ?? 0,
     })).filter((s) => s.count > 0),
     averages: {
       yearsSinceDiagnosis: (totalDiagnosisYears / n).toFixed(1),
@@ -67,8 +62,8 @@ export async function POST(request: Request) {
     if (!body.consentGiven) {
       return jsonError("É necessário consentir com o uso dos dados agregados.");
     }
-    if (!body.state) {
-      return jsonError("Informe seu estado.");
+    if (!body.state || !isDfAdminRegion(body.state)) {
+      return jsonError("Selecione sua região administrativa.");
     }
 
     await prisma.surveyResponse.create({

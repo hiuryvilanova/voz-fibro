@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { RelatorioMobilizacao } from "@/components/RelatorioMobilizacao";
 
 export const metadata: Metadata = {
-  title: "Retrato Fibro Brasil",
-  description: "Relatório agregado com dados da pesquisa nacional.",
+  title: "Retrato Fibro Brasília",
+  description: "Relatório agregado com dados da pesquisa no Distrito Federal.",
 };
 
 export default function RelatorioPage() {

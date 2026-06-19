@@ -315,7 +315,7 @@ export const artigos: Artigo[] = [
       "A Voz da Fibro nasce também como instrumento de mobilização social e política pública.",
       "Com seu consentimento explícito, dados agregados e anônimos podem mostrar a realidade da fibromialgia no Brasil: tempo até diagnóstico, dificuldades no SUS, impacto no trabalho, falta de especialistas.",
       "**O que NÃO fazemos:** vender seus dados, compartilhar informações individuais, usar dados sem consentimento.",
-      "**O que fazemos:** produzir relatórios como 'Retrato Fibro Brasil' para campanhas, audiências públicas e propostas de políticas.",
+      "**O que fazemos:** produzir relatórios como 'Retrato Fibro Brasília' para campanhas, audiências públicas e propostas de políticas no DF.",
       "**Você controla** — pode participar ou não da pesquisa, e pode retirar o consentimento a qualquer momento.",
       "Transformar vivência em evidência social é um dos pilares mais fortes deste projeto. Sua voz conta — e pode mudar políticas.",
     ],

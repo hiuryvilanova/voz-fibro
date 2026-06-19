@@ -10,7 +10,7 @@ export const metadata: Metadata = { title: "Sobre o projeto", description: "Conh
 export default function PilaresPage() {
   return (
     <div className="bg-background">
-      <PageHero eyebrow="Compromisso público" title="Sobre a Voz da Fibro" description="Uma plataforma nacional que reúne informação, acolhimento, ferramentas de cuidado e participação social para pessoas com fibromialgia, familiares e redes parceiras." />
+      <PageHero eyebrow="Compromisso público" title="Sobre a Voz da Fibro" description="Uma plataforma de Brasília que reúne informação, acolhimento, ferramentas de cuidado e participação social para pessoas com fibromialgia, familiares e redes parceiras no Distrito Federal." />
       <div className="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:px-10 lg:py-13">
         <Disclaimer />
         <section className="mt-12">
@@ -19,7 +19,7 @@ export default function PilaresPage() {
           <div className="mt-7 grid gap-6 lg:grid-cols-3">
             <PilarCard titulo="Acolhimento" descricao="Reduzir o isolamento e criar pertencimento por meio de espaços seguros." itens={["Comunidade moderada", "Rodas com especialistas", "Apoio a familiares", "Escuta com respeito"]} cor="primary" />
             <PilarCard titulo="Conhecimento" descricao="Oferecer informação acessível e ferramentas práticas para o cuidado." itens={["Biblioteca revisada", "Diário de sintomas", "Orientação sobre direitos", "Mapa de serviços"]} cor="secondary" />
-            <PilarCard titulo="Mobilização" descricao="Transformar vivências em evidências para fortalecer direitos e políticas públicas." itens={["Pesquisa com consentimento", "Retrato Fibro Brasil", "Dados agregados", "Participação social"]} cor="accent" />
+            <PilarCard titulo="Mobilização" descricao="Transformar vivências em evidências para fortalecer direitos e políticas públicas." itens={["Pesquisa com consentimento", "Retrato Fibro Brasília", "Dados agregados", "Participação social"]} cor="accent" />
           </div>
         </section>
 

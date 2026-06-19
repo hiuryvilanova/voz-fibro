@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ServiceIcon } from "@/components/ServiceIcon";
+import { DF_ADMIN_REGIONS, DF_STATE } from "@/lib/df-regions";
 
-const ESTADOS = ["AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"];
-const emptyForm = { email: "", password: "", confirmPassword: "", name: "", state: "", city: "", phone: "", profession: "", cpf: "", acceptTerms: false };
+const emptyForm = { email: "", password: "", confirmPassword: "", name: "", state: DF_STATE, city: "", phone: "", profession: "", cpf: "", acceptTerms: false };
 
 function digits(value: string) { return value.replace(/\D/g, ""); }
 function maskCpf(value: string) { return digits(value).slice(0, 11).replace(/(\d{3})(\d)/, "$1.$2").replace(/(\d{3})(\d)/, "$1.$2").replace(/(\d{3})(\d{1,2})$/, "$1-$2"); }
@@ -90,8 +90,8 @@ export function AuthForm({ initialError = "" }: { initialError?: string }) {
         {mode === "register" && <>
           <div><label htmlFor="name" className="text-sm font-bold">Nome completo</label><input id="name" required autoComplete="name" value={form.name} onChange={(e) => update("name", e.target.value)} className={inputClass} /></div>
           <div className="grid gap-4 sm:grid-cols-2">
-            <div><label htmlFor="state" className="text-sm font-bold">Estado</label><select id="state" required value={form.state} onChange={(e) => { e.currentTarget.setCustomValidity(""); update("state", e.target.value); }} onInvalid={(e) => e.currentTarget.setCustomValidity("Selecione seu estado para continuar.")} className={inputClass}><option value="">Selecione</option>{ESTADOS.map((uf) => <option key={uf}>{uf}</option>)}</select></div>
-            <div><label htmlFor="city" className="text-sm font-bold">Cidade</label><input id="city" required autoComplete="address-level2" value={form.city} onChange={(e) => update("city", e.target.value)} className={inputClass} /></div>
+            <div><label htmlFor="state" className="text-sm font-bold">Distrito Federal</label><input id="state" readOnly value="Distrito Federal (DF)" className={`${inputClass} cursor-not-allowed bg-surface-2 text-muted`} /></div>
+            <div><label htmlFor="city" className="text-sm font-bold">Região administrativa</label><select id="city" required value={form.city} onChange={(e) => { e.currentTarget.setCustomValidity(""); update("city", e.target.value); }} onInvalid={(e) => e.currentTarget.setCustomValidity("Selecione sua região administrativa para continuar.")} className={inputClass}><option value="">Selecione</option>{DF_ADMIN_REGIONS.map((ra) => <option key={ra} value={ra}>{ra}</option>)}</select></div>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             <div><label htmlFor="phone" className="text-sm font-bold">Telefone com DDD</label><input id="phone" required type="tel" inputMode="numeric" autoComplete="tel" maxLength={15} placeholder="(00) 00000-0000" value={form.phone} onChange={(e) => update("phone", maskPhone(e.target.value))} className={inputClass} /></div>

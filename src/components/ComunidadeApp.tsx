@@ -19,10 +19,14 @@ const demoGroups: Group[] = [
   { slug: "trabalho-direitos", name: "Trabalho e direitos", description: "Conversas sobre rotina profissional, adaptações e acesso à proteção social.", category: "tema", state: null, memberCount: 864, postCount: 219, isMember: false },
   { slug: "familia-cuidadores", name: "Família e cuidadores", description: "Informação para fortalecer o diálogo e construir redes de apoio no cotidiano.", category: "tema", state: null, memberCount: 612, postCount: 148, isMember: false },
   { slug: "movimento-bem-estar", name: "Movimento e bem-estar", description: "Vivências sobre atividade adaptada, descanso, sono e autocuidado responsável.", category: "tema", state: null, memberCount: 947, postCount: 287, isMember: false },
-  { slug: "comunidade-norte", name: "Comunidade Norte", description: "Rede regional para compartilhar serviços, iniciativas e experiências locais.", category: "regiao", state: "Norte", memberCount: 438, postCount: 96, isMember: false },
-  { slug: "comunidade-nordeste", name: "Comunidade Nordeste", description: "Conexão entre pacientes, familiares e associações dos estados nordestinos.", category: "regiao", state: "Nordeste", memberCount: 1104, postCount: 304, isMember: false },
-  { slug: "comunidade-centro-sul", name: "Comunidade Centro-Sul", description: "Informação regional e apoio entre pessoas do Centro-Oeste, Sudeste e Sul.", category: "regiao", state: "Centro-Sul", memberCount: 1536, postCount: 412, isMember: false },
-  { slug: "brasil-online", name: "Brasil online", description: "Grupo nacional para quem busca acolhimento independentemente da cidade onde vive.", category: "regiao", state: "Brasil", memberCount: 2340, postCount: 628, isMember: false },
+  { slug: "plano-piloto", name: "Plano Piloto", description: "Rede local para compartilhar serviços, iniciativas e experiências no coração de Brasília.", category: "regiao", state: "Plano Piloto", memberCount: 438, postCount: 96, isMember: false },
+  { slug: "taguatinga", name: "Taguatinga", description: "Conexão entre pacientes, familiares e associações da região de Taguatinga.", category: "regiao", state: "Taguatinga", memberCount: 612, postCount: 148, isMember: false },
+  { slug: "ceilandia", name: "Ceilândia", description: "Informação local e apoio entre moradores da maior região administrativa do DF.", category: "regiao", state: "Ceilândia", memberCount: 784, postCount: 201, isMember: false },
+  { slug: "samambaia", name: "Samambaia", description: "Grupo comunitário para trocar experiências sobre cuidado, SUS e direitos.", category: "regiao", state: "Samambaia", memberCount: 536, postCount: 124, isMember: false },
+  { slug: "aguas-claras", name: "Águas Claras", description: "Acolhimento e orientação para quem vive na região de Águas Claras e entorno.", category: "regiao", state: "Águas Claras", memberCount: 492, postCount: 118, isMember: false },
+  { slug: "gama", name: "Gama", description: "Espaço para fortalecer a rede de apoio no Gama e regiões vizinhas.", category: "regiao", state: "Gama", memberCount: 401, postCount: 89, isMember: false },
+  { slug: "sobradinho-planaltina", name: "Sobradinho e Planaltina", description: "Articulação comunitária nas regiões administrativas do extremo norte do DF.", category: "regiao", state: "Sobradinho", memberCount: 356, postCount: 77, isMember: false },
+  { slug: "brasilia-online", name: "Brasília online", description: "Grupo aberto para quem busca acolhimento em qualquer região administrativa do DF.", category: "regiao", state: "DF", memberCount: 1240, postCount: 328, isMember: false },
 ];
 
 export function ComunidadeApp() {
@@ -55,8 +59,8 @@ export function ComunidadeApp() {
 
       <section>
         <p className="text-sm font-bold uppercase tracking-wider text-primary">Perto de você</p>
-        <h2 className="mt-1 text-3xl font-extrabold text-foreground">Grupos por região</h2>
-        <p className="mt-2 max-w-2xl text-base leading-relaxed text-muted">Conecte-se com a rede da sua região e acompanhe iniciativas, serviços e encontros locais.</p>
+        <h2 className="mt-1 text-3xl font-extrabold text-foreground">Grupos por região administrativa</h2>
+        <p className="mt-2 max-w-2xl text-base leading-relaxed text-muted">Conecte-se com a rede da sua região em Brasília e acompanhe iniciativas, serviços e encontros locais.</p>
         <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {regionais.map((g) => (
             <GroupCard key={g.slug} group={g} />

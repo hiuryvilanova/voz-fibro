@@ -52,9 +52,9 @@ const slides = [
   {
     image: "/images/portal/slide-atendimento.jpg",
     eyebrow: "Serviços e direitos",
-    title: "Encontre caminhos de apoio disponíveis na sua região",
+    title: "Encontre caminhos de apoio disponíveis na sua região administrativa",
     description:
-      "Consulte serviços públicos, associações e iniciativas voltadas a pessoas com dor crônica.",
+      "Consulte serviços públicos, associações e iniciativas voltadas a pessoas com dor crônica em Brasília.",
     href: "/mapa",
     action: "Consultar o mapa",
     alt: "Ambiente preparado para atendimento em saúde",

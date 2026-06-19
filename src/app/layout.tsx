@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     default: "Voz da Fibro: Comunidade, Cuidado e Direitos",
     template: "%s | Voz da Fibro",
   },
-  description: "Plataforma nacional de acolhimento, informação confiável e mobilização social para pessoas com fibromialgia no Brasil.",
+  description: "Plataforma de acolhimento, informação confiável e mobilização social para pessoas com fibromialgia em Brasília e regiões administrativas do DF.",
   keywords: ["fibromialgia", "Voz da Fibro", "dor crônica", "saúde", "comunidade", "direitos"],
 };
 

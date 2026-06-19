@@ -2,12 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-
-const ESTADOS = [
-  "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA",
-  "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN",
-  "RS", "RO", "RR", "SC", "SP", "SE", "TO",
-];
+import { DF_ADMIN_REGIONS } from "@/lib/df-regions";
 
 function EscalaField({
   label,
@@ -80,7 +75,7 @@ export function PesquisaMobilizacao() {
           Obrigada por participar!
         </p>
         <p className="mt-2 text-sm text-muted">
-          Sua contribuição ajuda a construir o Retrato Fibro Brasil.
+          Sua contribuição ajuda a construir o Retrato Fibro Brasília.
         </p>
         <Link
           href="/mobilizacao/relatorio"
@@ -115,7 +110,7 @@ export function PesquisaMobilizacao() {
 
       <div>
         <label htmlFor="state" className="text-base font-bold">
-          Estado
+          Região administrativa
         </label>
         <select
           id="state"
@@ -125,13 +120,13 @@ export function PesquisaMobilizacao() {
             e.currentTarget.setCustomValidity("");
             setForm({ ...form, state: e.target.value });
           }}
-          onInvalid={(e) => e.currentTarget.setCustomValidity("Selecione seu estado para continuar.")}
+          onInvalid={(e) => e.currentTarget.setCustomValidity("Selecione sua região administrativa para continuar.")}
           className="mt-2 w-full rounded-md border border-border px-4 py-3 text-base"
         >
           <option value="">Selecione</option>
-          {ESTADOS.map((uf) => (
-            <option key={uf} value={uf}>
-              {uf}
+          {DF_ADMIN_REGIONS.map((region) => (
+            <option key={region} value={region}>
+              {region}
             </option>
           ))}
         </select>
